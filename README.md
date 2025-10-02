@@ -210,7 +210,7 @@ async function parseOrThrow(res, label) {
 
 export async function getProductList(page = 1, pageSize = 10, keyword = '') {
   try {
-    # // 파라미터 유효성 검사
+    // 파라미터 유효성 검사
     if (typeof page !== 'number' || page < 1) {
       throw new Error('page must be a positive number');
     }
@@ -375,7 +375,7 @@ export async function createBespokeAIJet() {
 }
 
 
-// src/main.js
+# // src/main.js
 import util from 'node:util';
 import {
   getArticleList,
@@ -706,3 +706,5 @@ class Article {
     e.favoriteCount
   );
 })();
+
+## 
