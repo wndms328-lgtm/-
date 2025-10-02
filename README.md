@@ -5,10 +5,8 @@
 - [ ] 기본 항목 2
 
 # // ArticleService.js
-
-# // Article API 요청 함수들을 구현합니다.
-
-# // https://panda-market-api-crud.vercel.app/docs 의 Article API를 사용합니다.
+// Article API 요청 함수들을 구현합니다.
+// https://panda-market-api-crud.vercel.app/docs 의 Article API를 사용합니다.
 
 import axios from 'axios';
 
@@ -160,7 +158,7 @@ throw error;
 }
 }
 
-# // 데모용 생성 함수
+// 데모용 생성 함수
 export function createTravelArticle() {
 try {
 const articleData = {
@@ -182,8 +180,8 @@ throw err;
 
 
 # // ProductService.js
-# // Product API 요청 함수들을 구현합니다.
-# // https://panda-market-api-crud.vercel.app/docs 의 Product API를 사용합니다.
+// Product API 요청 함수들을 구현합니다.
+// https://panda-market-api-crud.vercel.app/docs 의 Product API를 사용합니다.
 
 const BASE = 'https://panda-market-api-crud.vercel.app/products';
 
@@ -203,7 +201,7 @@ async function parseOrThrow(res, label) {
     const errorData = await res.json();
     msg = errorData?.message || errorData?.error || msg;
   } catch (parseError) {
-   # // JSON 파싱 실패 시 기본 메시지 사용
+   // JSON 파싱 실패 시 기본 메시지 사용
   }
 
   console.error('[Product API Error]', msg);
@@ -223,7 +221,7 @@ export async function getProductList(page = 1, pageSize = 10, keyword = '') {
       throw new Error('keyword must be a string');
     }
 
-    # // URL 구성 - 쿼리 파라미터 사용
+    // URL 구성 - 쿼리 파라미터 사용
     const params = new URLSearchParams({
       page: page.toString(),
       pageSize: pageSize.toString(),
@@ -282,7 +280,7 @@ export async function createProduct({
       throw new Error('images must be an array');
     }
 
-    # // request body 구성
+    // request body 구성
     const requestBody = {
       name,
       description,
@@ -356,7 +354,7 @@ export async function deleteProduct(id) {
   }
 }
 
-# // Bespoke AI 제트 400W 제품 생성 함수
+// Bespoke AI 제트 400W 제품 생성 함수
 export async function createBespokeAIJet() {
   const productData = {
     images: ['https://example.com/...'],
@@ -377,7 +375,7 @@ export async function createBespokeAIJet() {
 }
 
 
-# // src/main.js
+// src/main.js
 import util from 'node:util';
 import {
   getArticleList,
@@ -398,7 +396,7 @@ import {
 
 // 추상화/캡슐화: 프라이빗 필드(#)로 내부 상태 보호, 메서드로만 조작
 class Product {
-  #favoriteCount = 0;
+  favoriteCount = 0;
   constructor(name, description, price, tags = [], images = []) {
     this.name = name;
     this.description = description;
@@ -544,7 +542,7 @@ class Article {
     })
     .catch(() => {});
 
-  # // ------- Product API (async/await) -------
+  // ------- Product API (async/await) -------
   try {
     console.log('[Product API] 상품 목록 조회 시작...');
     const listRes = await getProductList(1, 10, '');
@@ -619,7 +617,7 @@ class Article {
       `[Product API] 총 ${products.length}개의 상품 인스턴스가 생성되었습니다.`
     );
 
-   # // 콘솔 예쁘게 (배열 내부는 [Array]로 축약)
+   // 콘솔 예쁘게 (배열 내부는 [Array]로 축약)
     const pretty = util.inspect(
       products.map((pr) => ({
         name: pr.name,
@@ -633,14 +631,14 @@ class Article {
 
     console.log('products:', pretty);
 
-   # // 단건 조회/생성/수정/삭제 샘플
+   // 단건 조회/생성/수정/삭제 샘플
     if (items[0]?.id) {
       console.log('[Product API] 첫 번째 상품 단건 조회...');
       const one = await getProduct(items[0].id);
       console.log('first product raw:', { id: one.id, name: one.name });
     }
 
-   # // 테스트 상품 생성
+   // 테스트 상품 생성
     console.log('[Product API] 테스트 상품 생성...');
     const created = await createProduct({
       name: '테스트 상품',
@@ -651,7 +649,7 @@ class Article {
     });
     console.log('created product:', created?.id);
 
-    # // Bespoke AI 제트 400W 제품 생성
+    // Bespoke AI 제트 400W 제품 생성
     console.log('[Product API] Bespoke AI 제트 400W 제품 생성...');
     const bespokeAI = await createBespokeAIJet();
     console.log('created Bespoke AI Jet:', {
@@ -661,7 +659,7 @@ class Article {
       tags: bespokeAI?.tags,
     });
 
-    # // 상품 수정 및 삭제
+    // 상품 수정 및 삭제
     if (created?.id) {
       console.log('[Product API] 상품 수정...');
       const patched = await patchProduct(created.id, {
@@ -679,7 +677,7 @@ class Article {
     console.error('[Product API] Error details:', e);
   }
 
-  # // ------- 클래스 동작 확인 -------
+  // ------- 클래스 동작 확인 -------
   const a = new Article('제목', '내용', '작성자');
   a.like();
   a.like();
